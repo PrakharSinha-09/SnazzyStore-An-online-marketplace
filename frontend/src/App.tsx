@@ -9,6 +9,8 @@ const Search = lazy(()=> import ("./pages/Search"))
 const Cart = lazy(()=> import ("./pages/Cart"))
 const Shipping=lazy(()=> import ("./pages/Shipping"))
 const Login=lazy(()=> import ("./pages/Login"))
+const Orders=lazy(()=> import ("./pages/Orders"))
+const OrderDetails=lazy(()=> import("./pages/OrderDetails"))
 
 //Admin routes importing
 const Dashboard = lazy(() => import("./pages/admin/dashboard"));
@@ -22,6 +24,7 @@ const Coupon = lazy(() => import("./pages/admin/apps/coupon"));
 const Stopwatch = lazy(() => import("./pages/admin/apps/stopwatch"));
 const Toss = lazy(() => import("./pages/admin/apps/toss"));
 const NewProduct = lazy(() => import("./pages/admin/management/newproduct"));
+
 const ProductManagement = lazy(
   () => import("./pages/admin/management/productmanagement")
 );
@@ -43,9 +46,11 @@ const App = () => {
           {/* Not logged in! */}
           <Route path="/login" element={<Login />}></Route>
 
-          {/* Logged In User Routes */}
+          {/* Logged In User Routes: Only Logged in user can access these routes */}
           <Route>
             <Route path="/shipping" element={<Shipping />}></Route>
+            <Route path="/orders" element={<Orders />}></Route>
+            <Route path="/order/:id" element={<OrderDetails />}></Route>
           </Route>
 
 
