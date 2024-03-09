@@ -14,7 +14,8 @@ const Shipping = () => {
     })
 
     const changeHandler=(e: ChangeEvent<HTMLInputElement | HTMLSelectElement>)=>{
-        setShippingInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+      const {name,value}=e.target
+        setShippingInfo((prev) => ({ ...prev, [name]: value }));
     }
 
   return (
