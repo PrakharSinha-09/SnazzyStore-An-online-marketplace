@@ -1,7 +1,10 @@
 import express from 'express';
 import { connectDB } from './utils/features.js';
 import { errorMiddleware } from './middlewares/error.js';
+import NodeCache from 'node-cache';
 connectDB();
+//will store the data in the RAM for the faster retrieval
+export const nodeCache = new NodeCache();
 const PORT = 3000;
 const app = express();
 app.use(express.json());
