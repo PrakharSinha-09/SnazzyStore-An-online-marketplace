@@ -15,8 +15,11 @@ import productRoute from './routes/products.js'
 app.use('/api/v1/user',userRoute)
 app.use('/api/v1/product',productRoute)
 
+app.use('/uploads',express.static("uploads"))
+
 //error handling middleware
 app.use(errorMiddleware)
+
 app.listen(PORT,()=>{
     console.log(`Server Running On ${PORT}`);
     
