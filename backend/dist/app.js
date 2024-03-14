@@ -2,18 +2,26 @@ import express from 'express';
 import { connectDB } from './utils/features.js';
 import { errorMiddleware } from './middlewares/error.js';
 import NodeCache from 'node-cache';
-connectDB();
+import { config } from 'dotenv';
+import morgan from 'morgan';
+config({
+    path: "./.env"
+});
+const PORT = process.env.PORT || 4000;
+connectDB(process.env.DATABASE_URL);
 //will store the data in the RAM for the faster retrieval
 export const nodeCache = new NodeCache();
-const PORT = 3000;
 const app = express();
 app.use(express.json());
+app.use(morgan("dev"));
 //Importing Routes
 import userRoute from './routes/user.js';
 import productRoute from './routes/products.js';
+import orderRoute from './routes/order.js';
 //Using Route
 app.use('/api/v1/user', userRoute);
 app.use('/api/v1/product', productRoute);
+app.use('/api/v1/order', orderRoute);
 app.use('/uploads', express.static("uploads"));
 //error handling middleware
 app.use(errorMiddleware);
