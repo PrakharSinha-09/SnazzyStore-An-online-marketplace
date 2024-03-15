@@ -5,7 +5,6 @@ import { Product } from "../models/product.js";
 import { BaseQuery, NewProductRequestBody, SearchRequestQuery } from "../types/types.js";
 import { rm } from "fs";
 import { nodeCache } from "../app.js";
-import { off } from "process";
 import { invalidateCache } from "../utils/features.js";
 
 export const newProduct = TryCatch(

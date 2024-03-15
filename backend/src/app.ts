@@ -10,10 +10,14 @@ config({
 })
 
 const PORT=process.env.PORT || 3000
+const stripeKey=process.env.STRIPE_KEY || ""
 connectDB(process.env.DATABASE_URL as string)
 
 //will store the data in the RAM for the faster retrieval
 export const nodeCache=new NodeCache();
+
+//stripe payment gateway
+export const stripe=new Stripe(stripeKey)
 
 const app=express()
 app.use(express.json())
@@ -25,6 +29,7 @@ import productRoute from './routes/products.js'
 import orderRoute from './routes/order.js'
 import paymentRoute from './routes/payment.js'
 import dashboardRoutes from './routes/admin-dashboard.js'
+import Stripe from 'stripe'
 
 //Using Route
 app.use('/api/v1/user',userRoute)

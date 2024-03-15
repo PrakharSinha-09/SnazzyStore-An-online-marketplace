@@ -1,6 +1,27 @@
+import { stripe } from "../app.js";
 import { TryCatch } from "../middlewares/error.js";
 import { Coupon } from "../models/coupon.js";
 import ErrorHandler from "../utils/utility-class.js";
+
+export const createPaymentIntent=TryCatch(async(req,res,next)=>{ 
+    const {amount}=req.body
+
+    if(!amount)
+    {
+        return next(new ErrorHandler("Please enter amount",400))
+    }
+    
+    //this paymentIntent variable is basically the payment client
+    const paymentIntent = await stripe.paymentIntents.create({
+        amount: Number(amount) * 100,        //this amount will be in the lowest terms, so it is in paisa and we are converting it into INR
+        currency: "inr",
+      });
+    
+      return res.status(201).json({
+        success: true,
+        clientSecret: paymentIntent.client_secret,           //this client secret, we will be using in frontend, so that stripe can figure out who is the client means who is making the payment
+      });
+})
 
 export const newCoupon=TryCatch(async(req,res,next)=>{
     const {coupon,amount}=req.body
