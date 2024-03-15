@@ -151,7 +151,7 @@ export const updateProductDetail= TryCatch(
       if(category) product.category=category;
   
       await product.save()
-      await invalidateCache({product:true})
+      await invalidateCache({product:true,productId:String(product._id)})
   
       return res.status(200).json({
         success: true,
@@ -175,7 +175,7 @@ export const deleteProduct= TryCatch(
     })
 
     await product.deleteOne()
-    await invalidateCache({product:true})
+    await invalidateCache({product:true,productId:String(product._id)})
     return res.status(200).json({
       success:true,
       msg:"Product Deleted Successfully!"

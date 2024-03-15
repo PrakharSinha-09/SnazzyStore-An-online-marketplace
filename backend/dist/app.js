@@ -7,7 +7,7 @@ import morgan from 'morgan';
 config({
     path: "./.env"
 });
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 3000;
 connectDB(process.env.DATABASE_URL);
 //will store the data in the RAM for the faster retrieval
 export const nodeCache = new NodeCache();

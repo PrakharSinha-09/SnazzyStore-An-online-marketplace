@@ -9,7 +9,7 @@ config({
     path: "./.env"
 })
 
-const PORT=process.env.PORT || 4000
+const PORT=process.env.PORT || 3000
 connectDB(process.env.DATABASE_URL as string)
 
 //will store the data in the RAM for the faster retrieval
@@ -18,7 +18,7 @@ export const nodeCache=new NodeCache();
 const app=express()
 app.use(express.json())
 app.use(morgan("dev"))
-
+ 
 //Importing Routes
 import userRoute from './routes/user.js'
 import productRoute from './routes/products.js'
